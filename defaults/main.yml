@@ -1,0 +1,18 @@
+---
+# Copyright (C) 2020 Stefan Hornburg (Racke) <racke@linuxia.de>
+# SPDX-License-Identifier: Artistic-2.0
+
+# Dovecot unix user and base path
+dovecot_unix_user: vmail
+dovecot_unix_group: "{{ dovecot_unix_user }}"
+dovecot_vmail_path: /var/mail/virtual
+
+dovecot_os_packages:
+  Debian:
+    - dovecot-imapd
+  RedHat:
+    - dovecot
+  Suse:
+    - dovecot
+
+dovecot_packages: "{{ dovecot_os_packages[ansible_os_family] }}"

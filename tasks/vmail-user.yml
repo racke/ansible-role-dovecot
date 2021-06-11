@@ -1,0 +1,21 @@
+---
+# Copyright (C) 2020 Stefan Hornburg (Racke) <racke@linuxia.de>
+# SPDX-License-Identifier: Artistic-2.0
+
+- name: Create Dovecot email user group
+  group:
+    name: "{{ dovecot_unix_group }}"
+    state: present
+
+- name: Create Dovecot email user
+  user:
+    name: "{{ dovecot_unix_user }}"
+    group: "{{ dovecot_unix_group }}"
+    home: "{{ dovecot_vmail_path }}"
+  register: dovecot_email_user_details
+
+- name: Determine UID and GID of Dovecot email user
+  set_fact:
+    dovecot_unix_uid: "{{ dovecot_email_user_details.uid }}"
+    dovecot_unix_gid: "{{ dovecot_email_user_details.group }}"
+  when: not ansible_check_mode
