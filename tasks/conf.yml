@@ -1,0 +1,21 @@
+---
+# Copyright (C) 2021 Stefan Hornburg (Racke) <racke@linuxia.de>
+# SPDX-License-Identifier: Artistic-2.0
+
+- name: Setup master configuration
+  template:
+    src: master.conf.j2
+    dest: /etc/dovecot/conf.d/10-master.conf
+    owner: root
+    group: root
+    mode: '0664'
+  notify: restart dovecot
+
+- name: Configure stats
+  template:
+    src: local.conf.j2
+    dest: /etc/dovecot/local.conf
+    owner: root
+    group: root
+    mode: '0664'
+  notify: restart dovecot

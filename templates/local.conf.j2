@@ -1,0 +1,13 @@
+service stats {
+    unix_listener stats-reader {
+        user = {{ dovecot_unix_user }}
+        group = {{ dovecot_unix_group }}
+        mode = 0660
+    }
+
+    unix_listener stats-writer {
+        user = {{ dovecot_unix_user }}
+        group = {{ dovecot_unix_group }}
+        mode = 0660
+    }
+}
