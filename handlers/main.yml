@@ -1,0 +1,8 @@
+---
+# Copyright (C) 2021 Stefan Hornburg (Racke) <racke@linuxia.de>
+# SPDX-License-Identifier: Artistic-2.0
+
+- name: restart dovecot
+  service:
+    name: dovecot
+    state: restarted
