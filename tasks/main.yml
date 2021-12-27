@@ -6,6 +6,6 @@
 
 - name: Ensure that dovecot is installed
   package:
-    pkg: "{{ dovecot_packages }}"
+    name: "{{ dovecot_packages }}"
     state: present
 
