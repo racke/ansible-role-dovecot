@@ -9,3 +9,5 @@
     name: "{{ dovecot_packages }}"
     state: present
 
+- name: Configure Dovecot
+  import_tasks: conf.yml
