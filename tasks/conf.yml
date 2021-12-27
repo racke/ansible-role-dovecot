@@ -11,6 +11,11 @@
     mode: '0664'
   notify: restart dovecot
 
+- name: Setup authentication configuration
+  template:
+    src: auth.conf.j2
+    dest: /etc/dovecot/conf.d/10-auth.conf
+
 - name: Configure stats
   template:
     src: local.conf.j2
