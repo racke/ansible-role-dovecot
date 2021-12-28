@@ -2,24 +2,24 @@
 # Copyright (C) 2021 Stefan Hornburg (Racke) <racke@linuxia.de>
 # SPDX-License-Identifier: Artistic-2.0
 
-- name: Create configuration directories (Arch Linux)
+- name: Create configuration directories (Arch Linux / FreeBSD)
   file:
     state: directory
     path: "{{ item }}"
     owner: root
-    group: root
+    group: "{{ dovecot_root_group }}"
     mode: '0755'
   loop:
-    - /etc/dovecot
-    - /etc/dovecot/conf.d
-  when: ansible_os_family == 'Archlinux'
+    - "{{ dovecot_configuration_directory }}"
+    - "{{ dovecot_configuration_directory }}/conf.d"
+  when: ansible_os_family in ['Archlinux', 'FreeBSD']
 
 - name: Setup main configuration file
   template:
     src: dovecot.conf.j2
-    dest: /etc/dovecot/dovecot.conf
+    dest: "{{ dovecot_configuration_directory }}/dovecot.conf"
     owner: root
-    group: root
+    group: "{{ dovecot_root_group }}"
     mode: '0664'
   notify: restart dovecot
   when: ansible_os_family == 'Archlinux'
@@ -27,22 +27,22 @@
 - name: Setup master configuration
   template:
     src: master.conf.j2
-    dest: /etc/dovecot/conf.d/10-master.conf
+    dest: "{{ dovecot_configuration_directory }}/conf.d/10-master.conf"
     owner: root
-    group: root
+    group: "{{ dovecot_root_group }}"
     mode: '0664'
   notify: restart dovecot
 
 - name: Setup authentication configuration
   template:
     src: auth.conf.j2
-    dest: /etc/dovecot/conf.d/10-auth.conf
+    dest: "{{ dovecot_configuration_directory }}/conf.d/10-auth.conf"
 
 - name: Configure stats
   template:
     src: local.conf.j2
-    dest: /etc/dovecot/local.conf
+    dest: "{{ dovecot_configuration_directory }}/local.conf"
     owner: root
-    group: root
+    group: "{{ dovecot_root_group }}"
     mode: '0664'
   notify: restart dovecot

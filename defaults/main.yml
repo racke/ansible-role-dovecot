@@ -7,6 +7,17 @@ dovecot_unix_user: vmail
 dovecot_unix_group: "{{ dovecot_unix_user }}"
 dovecot_vmail_path: /var/mail/virtual
 
+# Root group
+dovecot_os_root_group:
+  FreeBSD: wheel
+dovecot_root_group: "{{ dovecot_os_root_group[ansible_os_family] | default('root') }}"
+
+# Configuration directory
+dovecot_os_configuration_directory:
+  FreeBSD: /usr/local/etc/dovecot
+dovecot_configuration_directory: "{{ dovecot_os_configuration_directory[ansible_os_family] | default('/etc/dovecot') }}"
+
+# Packages
 dovecot_os_packages:
   Debian:
     - dovecot-imapd
