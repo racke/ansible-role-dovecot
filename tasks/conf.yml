@@ -2,6 +2,18 @@
 # Copyright (C) 2021 Stefan Hornburg (Racke) <racke@linuxia.de>
 # SPDX-License-Identifier: Artistic-2.0
 
+- name: Create configuration directories (Arch Linux)
+  file:
+    state: directory
+    path: "{{ item }}"
+    owner: root
+    group: root
+    mode: '0755'
+  loop:
+    - /etc/dovecot
+    - /etc/dovecot/conf.d
+  when: ansible_os_family == 'Archlinux'
+
 - name: Setup master configuration
   template:
     src: master.conf.j2
