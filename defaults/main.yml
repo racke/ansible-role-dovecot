@@ -8,13 +8,7 @@ dovecot_unix_group: "{{ dovecot_unix_user }}"
 dovecot_vmail_path: /var/mail/virtual
 
 dovecot_os_packages:
-  Alpine:
-    - dovecot
   Debian:
     - dovecot-imapd
-  RedHat:
-    - dovecot
-  Suse:
-    - dovecot
 
-dovecot_packages: "{{ dovecot_os_packages[ansible_os_family] }}"
+dovecot_packages: "{{ dovecot_os_packages[ansible_os_family] | default('dovecot') }}"
