@@ -11,3 +11,9 @@
 
 - name: Configure Dovecot
   import_tasks: conf.yml
+
+- name: Ensure that Dovecot is enabled and started
+  service:
+    name: dovecot
+    state: started
+    enabled: yes
