@@ -24,16 +24,23 @@ dovecot_databases:
 # Root group
 dovecot_os_root_group:
   FreeBSD: wheel
-dovecot_root_group: "{{ dovecot_os_root_group[ansible_os_family] | default('root') }}"
+dovecot_root_group:
+  "{{ dovecot_os_root_group[ansible_os_family] | default('root') }}"
 
-# Configuration directory
+# Configuration directories
 dovecot_os_configuration_directory:
   FreeBSD: /usr/local/etc/dovecot
-dovecot_configuration_directory: "{{ dovecot_os_configuration_directory[ansible_os_family] | default('/etc/dovecot') }}"
+
+dovecot_configuration_directory:
+  "{{ dovecot_os_configuration_directory[ansible_os_family]
+   | default('/etc/dovecot') }}"
+
+dovecot_dropin_directory: "{{ dovecot_configuration_directory }}/conf.d"
 
 # Packages
 dovecot_os_packages:
   Debian:
     - dovecot-imapd
 
-dovecot_packages: "{{ dovecot_os_packages[ansible_os_family] | default('dovecot') }}"
+dovecot_packages:
+  "{{ dovecot_os_packages[ansible_os_family] | default('dovecot') }}"

@@ -11,7 +11,7 @@
     mode: '0755'
   loop:
     - "{{ dovecot_configuration_directory }}"
-    - "{{ dovecot_configuration_directory }}/conf.d"
+    - "{{ dovecot_dropin_directory }}"
   when: ansible_os_family in ['Archlinux', 'FreeBSD']
 
 - name: Setup main configuration file
@@ -27,7 +27,7 @@
 - name: Setup master configuration
   template:
     src: master.conf.j2
-    dest: "{{ dovecot_configuration_directory }}/conf.d/10-master.conf"
+    dest: "{{ dovecot_dropin_directory }}/10-master.conf"
     owner: root
     group: "{{ dovecot_root_group }}"
     mode: '0664'
@@ -36,7 +36,7 @@
 - name: Setup SSL configuration
   template:
     src: ssl.conf.j2
-    dest: "{{ dovecot_configuration_directory }}/conf.d/10-ssl.conf"
+    dest: "{{ dovecot_dropin_directory }}/10-ssl.conf"
     group: "{{ dovecot_root_group }}"
     mode: '0664'
   notify: restart dovecot
@@ -44,7 +44,7 @@
 - name: Setup authentication configuration
   template:
     src: auth.conf.j2
-    dest: "{{ dovecot_configuration_directory }}/conf.d/10-auth.conf"
+    dest: "{{ dovecot_dropin_directory }}/10-auth.conf"
     group: "{{ dovecot_root_group }}"
     mode: '0664'
   notify: restart dovecot
@@ -52,7 +52,7 @@
 - name: Setup various authentication methods
   template:
     src: "auth-{{ item }}.conf.ext.j2"
-    dest: "{{ dovecot_configuration_directory }}/conf.d/auth-{{ item }}.conf.ext"
+    dest: "{{ dovecot_dropin_directory }}/auth-{{ item }}.conf.ext"
     group: "{{ dovecot_root_group }}"
     mode: '0664'
   loop: "{{ dovecot_available_databases }}"
