@@ -33,6 +33,14 @@
     mode: '0664'
   notify: restart dovecot
 
+- name: Setup SSL configuration
+  template:
+    src: ssl.conf.j2
+    dest: "{{ dovecot_configuration_directory }}/conf.d/10-ssl.conf"
+    group: "{{ dovecot_root_group }}"
+    mode: '0664'
+  notify: restart dovecot
+
 - name: Setup authentication configuration
   template:
     src: auth.conf.j2
