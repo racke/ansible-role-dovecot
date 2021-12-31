@@ -37,6 +37,9 @@
   template:
     src: auth.conf.j2
     dest: "{{ dovecot_configuration_directory }}/conf.d/10-auth.conf"
+    group: "{{ dovecot_root_group }}"
+    mode: '0664'
+  notify: restart dovecot
 
 - name: Setup various authentication methods
   template:
