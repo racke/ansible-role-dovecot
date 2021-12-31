@@ -22,7 +22,7 @@
     group: "{{ dovecot_root_group }}"
     mode: '0664'
   notify: restart dovecot
-  when: ansible_os_family == 'Archlinux'
+  when: ansible_os_family in ['Archlinux', 'FreeBSD']
 
 - name: Setup master configuration
   template:
