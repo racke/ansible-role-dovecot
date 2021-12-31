@@ -7,6 +7,20 @@ dovecot_unix_user: vmail
 dovecot_unix_group: "{{ dovecot_unix_user }}"
 dovecot_vmail_path: /var/mail/virtual
 
+# Dovecot databases
+dovecot_available_databases:
+  - deny
+  - system
+  - sql
+  - ldap
+  - dict
+  - passwdfile
+  - checkpassword
+
+dovecot_databases:
+  - deny
+  - system
+
 # Root group
 dovecot_os_root_group:
   FreeBSD: wheel

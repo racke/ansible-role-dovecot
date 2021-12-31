@@ -38,6 +38,14 @@
     src: auth.conf.j2
     dest: "{{ dovecot_configuration_directory }}/conf.d/10-auth.conf"
 
+- name: Setup various authentication methods
+  template:
+    src: "auth-{{ item }}.conf.ext.j2"
+    dest: "{{ dovecot_configuration_directory }}/conf.d/auth-{{ item }}.conf.ext"
+    group: "{{ dovecot_root_group }}"
+    mode: '0664'
+  loop: "{{ dovecot_available_databases }}"
+
 - name: Configure stats
   template:
     src: local.conf.j2
