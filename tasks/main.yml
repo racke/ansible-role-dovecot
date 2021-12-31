@@ -16,4 +16,4 @@
   service:
     name: dovecot
     state: started
-    enabled: yes
+    enabled: true
