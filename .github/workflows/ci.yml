@@ -70,7 +70,13 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install test dependencies.
+      - name: Install YAML Lint test dependency
+        run: pip3 install yamllint
+
+      - name: Install Ansible Lint test dependency
+        run: pip3 install ansible-lint
+
+      - name: Install Ansible dependency
         run: pip3 install ansible molecule[podman] podman
 
       - name: Run Molecule tests.
