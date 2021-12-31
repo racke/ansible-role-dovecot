@@ -1,0 +1,9 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+
+  tasks:
+    - name: "Include dovecot"
+      include_role:
+        name: "dovecot"
