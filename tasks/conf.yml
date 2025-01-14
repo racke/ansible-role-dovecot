@@ -57,6 +57,14 @@
     mode: '0664'
   loop: "{{ dovecot_available_databases }}"
 
+- name: Configure logging
+  template:
+    src: logging.conf.j2
+    dest: "{{ dovecot_dropin_directory }}/10-logging.conf"
+    group: "{{ dovecot_root_group }}"
+    mode: '0644'
+  notify: restart dovecot
+
 - name: Configure stats
   template:
     src: local.conf.j2

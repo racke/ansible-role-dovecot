@@ -46,5 +46,8 @@ dovecot_os_packages:
 dovecot_packages:
   "{{ dovecot_os_packages[ansible_os_family] | default('dovecot') }}"
 
+# Logging
+dovecot_log_path: syslog
+
 # MTA support
 dovecot_exim_support: false
