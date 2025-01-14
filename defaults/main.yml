@@ -45,3 +45,6 @@ dovecot_os_packages:
 
 dovecot_packages:
   "{{ dovecot_os_packages[ansible_os_family] | default('dovecot') }}"
+
+# MTA support
+dovecot_exim_support: false

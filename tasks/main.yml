@@ -12,6 +12,10 @@
 - name: Configure Dovecot
   import_tasks: conf.yml
 
+- name: Exim śupport
+  import_tasks: exim.yml
+  when: dovecot_exim_support is sameas true
+
 - name: Ensure that Dovecot is enabled and started
   service:
     name: dovecot

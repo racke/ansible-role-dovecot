@@ -1,0 +1,19 @@
+---
+# Copyright (C) 2021-2025 Stefan Hornburg (Racke) <racke@linuxia.de>
+# SPDX-License-Identifier: Artistic-2.0
+
+- name: Create Dovecot router
+  template:
+    src: exim/dovecot-router.js
+    dest: /etc/exim4/conf.d/router/199_dovecot_lda
+  notify:
+    - Update Exim4 conf
+    - Restart Exim4
+
+- name: Create Dovecot transport
+  template:
+    src: exim/dovecot-transport.js
+    dest: /etc/exim4/conf.d/transport/50_dovecot_transport
+  notify:
+    - Update Exim4 conf
+    - Restart Exim4
