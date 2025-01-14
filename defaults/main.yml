@@ -9,16 +9,14 @@ dovecot_vmail_path: /var/mail/virtual
 
 # Dovecot databases
 dovecot_available_databases:
-  - deny
   - system
   - sql
   - ldap
-  - dict
   - passwdfile
   - checkpassword
+  - static
 
 dovecot_databases:
-  - deny
   - system
 
 # Root group
