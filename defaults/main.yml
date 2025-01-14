@@ -19,6 +19,9 @@ dovecot_available_databases:
 dovecot_databases:
   - system
 
+# Password file
+dovecot_passwdfile: "{{ dovecot_configuration_directory }}/users"
+
 # Root group
 dovecot_os_root_group:
   FreeBSD: wheel
